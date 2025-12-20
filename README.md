@@ -48,29 +48,30 @@ echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/Cyberbotics.asc] [https://cybe
 # Update and install
 sudo apt update
 sudo apt install webots
+```
 
-2.  **Clone the repository:**
+### 2.  **Clone the repository:**
     ```bash
     git clone [https://github.com/SkyShankar/UAV-Navigation-in-GPS-Denied-Environment-using-Webots-and-ROS2.git](https://github.com/SkyShankar/UAV-Navigation-in-GPS-Denied-Environment-using-Webots-and-ROS2.git)
     ```
 
-3.  **Navigate to the workspace:**
+### 3.  **Navigate to the workspace:**
     ```bash
     cd UAV-Navigation-in-GPS-Denied-Environment-using-Webots-and-ROS2
     ```
 
-4.  **Install dependencies:**
+### 4.  **Install dependencies:**
     ```bash
     rosdep update
     rosdep install --from-paths src --ignore-src -r -y
     ```
 
-5.  **Build the workspace:**
+### 5.  **Build the workspace:**
     ```bash
     colcon build --symlink-install
     ```
 
-6.  **Source the setup file:**
+### 6.  **Source the setup file:**
     ```bash
     source install/setup.bash
     ```
