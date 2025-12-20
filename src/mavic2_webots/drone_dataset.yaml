@@ -1,0 +1,12 @@
+# drone_dataset.yaml
+
+# Path to the root of your dataset
+path: ./dataset/
+
+# Train/Validation split. YOLO will automatically use 80% for training, 20% for validation.
+train: images
+val: images
+
+# Class names
+names:
+  0: drone

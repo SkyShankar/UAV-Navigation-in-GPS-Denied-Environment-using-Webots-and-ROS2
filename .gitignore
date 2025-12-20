@@ -1,0 +1,32 @@
+# --- ROS 2 & Colcon Folders ---
+# These are generated every time you run 'colcon build'
+build/
+install/
+log/
+logs/
+
+# --- Python ---
+__pycache__/
+*.pyc
+setup.cfg
+
+# --- Webots Temporary Files ---
+# These appear inside your controllers folders
+*.exe
+*.o
+*.class
+.DS_Store
+
+# --- VS Code / IDE settings (Optional) ---
+.vscode/
+
+# --- Specific Garbage inside src ---
+# You mentioned you have build/install inside src by mistake
+src/build/
+src/install/
+src/log/
+
+# --- Heavy Data (Optional) ---
+# If your 'dataset' or 'runs' folders are huge (GBs), uncomment below to ignore them:
+# src/mavic2_webots/dataset/
+# src/mavic2_webots/runs/
