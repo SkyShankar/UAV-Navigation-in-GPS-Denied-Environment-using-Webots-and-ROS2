@@ -50,28 +50,59 @@ sudo apt update
 sudo apt install webots
 ```
 
-### 2.  **Clone the repository:**
+### 2. **Install ROS 2 Humble**
+```bash
+# Set locale
+locale  # check for UTF-8
+
+sudo apt update && sudo apt install locales
+sudo locale-gen en_US en_US.UTF-8
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+# Setup Sources
+sudo apt install software-properties-common
+sudo add-apt-repository universe
+sudo apt update && sudo apt install curl -y
+sudo curl -sSL [https://raw.githubusercontent.com/ros2/ros2/master/ros2.repos](https://raw.githubusercontent.com/ros2/ros2/master/ros2.repos) -o /tmp/ros2.repos # This line is often handled by adding the key manually, simpler version below:
+
+# Authorize ROS 2 GPG Key
+sudo curl -sSL [https://raw.githubusercontent.com/ros/rosdistro/master/ros.key](https://raw.githubusercontent.com/ros/rosdistro/master/ros.key) -o /usr/share/keyrings/ros-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] [http://packages.ros.org/ros2/ubuntu](http://packages.ros.org/ros2/ubuntu) $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+
+# Install ROS 2 Humble Desktop
+sudo apt update
+sudo apt install ros-humble-desktop
+sudo apt install ros-dev-tools
+```
+
+### 3.  **Install Webots-ROS2 Bridge**
+```bash
+sudo apt install ros-humble-webots-ros2
+```
+
+### 4.  **Clone the repository:**
 ```bash
 git clone [https://github.com/SkyShankar/UAV-Navigation-in-GPS-Denied-Environment-using-Webots-and-ROS2.git](https://github.com/SkyShankar/UAV-Navigation-in-GPS-Denied-Environment-using-Webots-and-ROS2.git)
 ```
 
-### 3.  **Navigate to the workspace:**
+### 5.  **Navigate to the workspace:**
 ```bash
 cd UAV-Navigation-in-GPS-Denied-Environment-using-Webots-and-ROS2
 ```
 
-### 4.  **Install dependencies:**
+### 6.  **Install dependencies:**
 ```bash
 rosdep update
 rosdep install --from-paths src --ignore-src -r -y
 ```
 
-### 5.  **Build the workspace:**
+### 7.  **Build the workspace:**
 ```bash
 colcon build --symlink-install
 ```
 
-### 6.  **Source the setup file:**
+### 8.  **Source the setup file:**
 ```bash
 source install/setup.bash
 ```
