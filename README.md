@@ -1,16 +1,60 @@
 # UAV Navigation in GPS-Denied Environment using Webots and ROS 2
 
-This repository contains a simulation framework for autonomous UAV navigation in GPS-denied environments. It utilizes **Webots** for physics simulation and **ROS 2** for control logic, state estimation, and sensor fusion.
+This repository contains the simulation framework and source code for the Master's Thesis: **"Robust State Estimation and Control for UAV Formation Flight using Vision-LiDAR Odometry."**
 
-## 🚀 Project Overview
+The project implements a **Leader-Follower** architecture where a follower drone autonomously tracks a moving leader drone without relying on its own Global Positioning System (GPS). Instead, it fuses onboard Inertial Measurement Unit (IMU) data with relative visual estimates (YOLO + LiDAR) to perform cooperative localization and nonlinear optimal control.
 
-The primary goal is to estimate the state (position, velocity, orientation) of a Mavic 2 Pro drone without relying on GPS data. The system uses an **Extended Kalman Filter (EKF)** to fuse data from onboard sensors (IMU, Optical Flow, etc.).
+## 🚀 Key Features
 
-### Key Features
-* **Simulation:** High-fidelity Mavic 2 Pro simulation in Webots.
-* **State Estimation:** Custom EKF implementation specifically for GPS-denied navigation.
-* **ROS 2 Architecture:** Modular design with separate nodes for logging, filtering, and control.
-* **Data Analysis:** Integrated logging tools to generate performance graphs (`logs/` folder).
+* **Simulation Environment:** High-fidelity physics simulation using **Webots** with **ROS 2 (Humble)** middleware.
+* **Computer Vision:** Real-time object detection using **YOLOv11** to identify the leader drone in the camera frame.
+* **Sensor Fusion:** A custom **Extended Kalman Filter (EKF)** that fuses high-rate IMU data with low-rate relative position measurements.
+* **Nonlinear Control:** Implementation of the **State-Dependent Riccati Equation (SDRE)** controller for aggressive maneuver tracking, handling nonlinearities like gravity coupling.
+* **Cooperative Localization:** The follower estimates its global state by transforming relative body-frame measurements into the navigation frame using derived kinematic relationships.
+
+---
+
+## 🛠️ System Architecture
+
+The system consists of two drones: a **Leader** (which follows a pre-defined path) and a **Follower** (which must maintain a fixed distance and heading).
+
+### 1. Sensing & Perception
+The follower drone is equipped with:
+* **RGB Camera:** Captures images for the YOLOv11 model to calculate the bounding box center $(u, v)$ of the leader.
+* **LiDAR:** Provides the scalar distance ($D$) to the leader.
+* **IMU:** Provides angular rates $(p, q, r)$ and linear accelerations $(a_x, a_y, a_z)$.
+
+### 2. Relative Localization Strategy
+Instead of relying on GPS, the follower calculates the relative vector to the leader in 3D space:
+1.  **Visual Servoing:** The horizontal ($\alpha$) and vertical ($\beta$) bearing angles are derived from the camera's Field of View (FOV) and the target's pixel coordinates.
+2.  **Spherical-to-Cartesian:** The scalar distance $D$ from LiDAR is projected using $\alpha$ and $\beta$ to obtain the relative position vector in the **Body Frame**:
+    $$\vec{P}_{body} = [d_x, d_y, d_z]^T$$
+3.  **Frame Transformation:** To utilize this in the EKF, the vector is transformed to the **Navigation Frame** (ENU) using the transpose of the rotation matrix $C_{bn}$ (Navigation-to-Body):
+    $$\vec{P}_{nav} = C_{bn}^T \cdot \vec{P}_{body}$$
+
+### 3. State Estimation (EKF)
+An **Extended Kalman Filter** estimates the 9-DOF state vector:
+$$\mathbf{x} = [x, y, z, U, V, W, \phi, \theta, \psi]^T$$
+
+* **Prediction:** Standard kinematic propagation using IMU inputs.
+* **Correction:** Uses the transformed relative position combined with the leader's known position to generate "Pseudo-GPS" updates.
+* **Gravity Regularization:** Special care is taken in the system matrix $\mathbf{A}(\mathbf{x})$ to regularize singular gravity terms (e.g., $\frac{\sin\theta}{\theta}$) during hover conditions.
+
+### 4. Control (SDRE)
+The control allocation uses the **State-Dependent Riccati Equation (SDRE)** method. Unlike standard PID, SDRE treats the system matrices as state-dependent ($\mathbf{A}(\mathbf{x})$), allowing for optimal control over the full flight envelope.
+* **Guidance:** A visual servoing loop commands **Yaw** to center the leader ($\alpha \to 0$).
+* **Stability:** Inner-loop SDRE controllers maintain stability by fighting "parasitic" roll disturbances induced by continuous yawing maneuvers.
+
+---
+
+## 📊 Results
+
+The framework was tested in scenarios involving curved paths and continuous turning.
+* **Tracking Accuracy:** The system successfully maintains the leader within the camera FOV using the visual servoing yaw controller.
+* **Disturbance Rejection:** The controller effectively compensates for the roll coupling ($\approx -0.2$ rad) generated during sustained yaw maneuvers, preventing lateral drift.
+* **Estimation:** The EKF provides smooth state estimates even when visual measurements are noisy or intermittent.
+
+---
 
 ## 📂 Repository Structure
 
