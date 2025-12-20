@@ -51,30 +51,30 @@ sudo apt install webots
 ```
 
 ### 2.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/SkyShankar/UAV-Navigation-in-GPS-Denied-Environment-using-Webots-and-ROS2.git](https://github.com/SkyShankar/UAV-Navigation-in-GPS-Denied-Environment-using-Webots-and-ROS2.git)
-    ```
+```bash
+git clone [https://github.com/SkyShankar/UAV-Navigation-in-GPS-Denied-Environment-using-Webots-and-ROS2.git](https://github.com/SkyShankar/UAV-Navigation-in-GPS-Denied-Environment-using-Webots-and-ROS2.git)
+```
 
 ### 3.  **Navigate to the workspace:**
-    ```bash
-    cd UAV-Navigation-in-GPS-Denied-Environment-using-Webots-and-ROS2
-    ```
+```bash
+cd UAV-Navigation-in-GPS-Denied-Environment-using-Webots-and-ROS2
+```
 
 ### 4.  **Install dependencies:**
-    ```bash
-    rosdep update
-    rosdep install --from-paths src --ignore-src -r -y
-    ```
+```bash
+rosdep update
+rosdep install --from-paths src --ignore-src -r -y
+```
 
 ### 5.  **Build the workspace:**
-    ```bash
-    colcon build --symlink-install
-    ```
+```bash
+colcon build --symlink-install
+```
 
 ### 6.  **Source the setup file:**
-    ```bash
-    source install/setup.bash
-    ```
+```bash
+source install/setup.bash
+```
 
 ## ▶️ Usage
 
@@ -82,6 +82,5 @@ To launch the simulation and the EKF nodes:
 
 ```bash
 ros2 launch mavic2_ekf_pkg <your_launch_file>.py
-
 
 
