@@ -43,6 +43,44 @@ cd /etc/apt/keyrings
 sudo wget -q [https://cyberbotics.com/Cyberbotics.asc](https://cyberbotics.com/Cyberbotics.asc)
 echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/Cyberbotics.asc] [https://cyberbotics.com/debian](https://cyberbotics.com/debian) binary-amd64/" | sudo tee /etc/apt/sources.list.d/Cyberbotics.list
 
+
+
 # Update and install
 sudo apt update
 sudo apt install webots
+
+2.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/SkyShankar/UAV-Navigation-in-GPS-Denied-Environment-using-Webots-and-ROS2.git](https://github.com/SkyShankar/UAV-Navigation-in-GPS-Denied-Environment-using-Webots-and-ROS2.git)
+    ```
+
+3.  **Navigate to the workspace:**
+    ```bash
+    cd UAV-Navigation-in-GPS-Denied-Environment-using-Webots-and-ROS2
+    ```
+
+4.  **Install dependencies:**
+    ```bash
+    rosdep update
+    rosdep install --from-paths src --ignore-src -r -y
+    ```
+
+5.  **Build the workspace:**
+    ```bash
+    colcon build --symlink-install
+    ```
+
+6.  **Source the setup file:**
+    ```bash
+    source install/setup.bash
+    ```
+
+## ▶️ Usage
+
+To launch the simulation and the EKF nodes:
+
+```bash
+ros2 launch mavic2_ekf_pkg <your_launch_file>.py
+
+
+
