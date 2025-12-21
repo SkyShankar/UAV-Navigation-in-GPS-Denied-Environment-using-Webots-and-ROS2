@@ -107,7 +107,7 @@ rosdep update
 
 rosdep install --from-paths src --ignore-src -r -y
 
-pip3 install ultralytics # ROS2 Library
+pip3 install ultralytics # YOLOv8 Library
 ```
 
 ### 7.  **Build the workspace:**
