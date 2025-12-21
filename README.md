@@ -125,6 +125,7 @@ source install/setup.bash
 To launch the simulation and the EKF nodes:
 
 ```bash
-ros2 launch mavic2_ekf_pkg <your_launch_file>.py
+webots ~<webots_file_location>.wbt
+ros2 launch mavic2_ekf_pkg <launch_file_location>.py
 
 
