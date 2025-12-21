@@ -40,6 +40,7 @@ The project is organized as a ROS 2 workspace:
 * **OS:** Ubuntu 22.04.5 LTS
 * **ROS 2:** Humble Hawksbill
 * **Webots:** R2024b (or newer)
+* **Object Detection Algo.** YOLOv8 (You Only Look Once Version 8)
 * **ros-webots-bridge:** `ros-humble-webots-ros2`
 
 ## ⚙️ Installation
