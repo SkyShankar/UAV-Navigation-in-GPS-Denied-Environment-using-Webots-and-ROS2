@@ -1,25 +1,25 @@
 # UAV Navigation in GPS-Denied Environment using Webots and ROS 2
 
-This repository contains the simulation framework and source code for the Master's Thesis: **"Robust State Estimation and Control for UAV Formation Flight using Vision-LiDAR Odometry."**
+This repository contains the simulation framework and source code for the Master's Thesis: **"Cooperative UAV Navigation in GPS-Denied Environments Using ROS2 and Webots Simulation"**
 
-The project implements a **Leader-Follower** architecture where a follower drone autonomously tracks a moving leader drone without relying on its own Global Positioning System (GPS). Instead, it fuses onboard Inertial Measurement Unit (IMU) data with relative visual estimates (Camera (YOLO) + LiDAR) to perform cooperative localization and nonlinear optimal control.
+The project implements a **Leader-Follower** architecture where a follower drone(No GPS) autonomously tracks and follows a moving leader drone(GPS) without relying on Global Positioning Data. Instead, it fuses onboard Inertial Measurement Unit (IMU) data with relative visual estimates (Camera (YOLO) + LiDAR) to perform cooperative localization and nonlinear optimal control.
 
 ## 🚀 Key Features
 
-* **Simulation Environment:** High-fidelity physics simulation using **Webots** with **ROS 2 (Humble)** middleware.
-* **Computer Vision:** Real-time object detection using **YOLOv8** to identify the leader drone in the camera frame.
-* **State Estimator:** Implementation of the custom **Extended Kalman Filter (EKF)** and **State-Dependent Riccati Equation (SDRE) Filter** that fuses high-rate IMU data with low-rate relative position measurements.
-* **Sensor Fusion:** Implementing sensor fusion of Camera (YOLOv8) + LiDAR and try to fetch local position of leader drone w.r.t. follower drone's coordinate system and try to mainatin given distance between both drones.
-* **Cooperative Localization and Navigation:** Two scenarios has been considered for coperative localizetion and navigation:
-*    **Scenario 1:** Active communication between Leader and Follower drone, where Leader drone is sending its own GPS location at low frequancy. (local position + leader's global position = Pseudo-GPS (For follower drone's localization over global frame))
-*    **Scenatio 2:** No Communication between Leader and follower drone, where follower drone doesn't have any localization facilty due to now global reference. (Still will follow leader drone with the help of sensor fusion's local postion data and mainatin given distance)
+* **Simulation Environment:** Developed a high-fidelity physics simulation using Webots and ROS 2 (Humble) middleware to model complex drone dynamics.
+* **Computer Vision:** Integrated YOLOv8 for real-time object detection to robustly identify and track the leader drone within the camera frame.
+* **State Estimator:** Designed and implemented custom Extended Kalman Filter (EKF) and State-Dependent Riccati Equation (SDRE) filters to fuse high-rate IMU data with low-rate relative position measurements.
+* **Sensor Fusion:** Implemented multi-sensor fusion (Camera/YOLOv8 + LiDAR) to estimate the leader’s relative position within the follower's local coordinate system, enabling precise distance maintenance (Formation Flying).
+* **Cooperative Localization and Navigation:** Validated the framework in two distinct operational scenarios:
+*    **Scenario 1:** Active V2V communication where the Leader transmits its GPS coordinates. The follower computes a "Pseudo-GPS" position by combining relative sensor data with the leader's global position.
+*    **Scenatio 2:** Operates without communication or global references. The follower maintains formation solely relying on onboard sensor fusion for relative navigation, validating autonomy in GPS-denied environments.
 
 ## 📊 Results
 
 The framework was tested in scenarios involving curved paths and continuous turning.
-* **Tracking Accuracy:** The system successfully maintains the leader within the camera FOV using the visual servoing yaw controller.
-* **Disturbance Rejection:** The controller effectively compensates for the roll coupling ($\approx -0.2$ rad) generated during sustained yaw maneuvers, preventing lateral drift.
-* **Estimation:** The EKF provides smooth state estimates even when visual measurements are noisy or intermittent.
+* **Tracking Accuracy:** Achieved precise leader-follower formation by maintaining a fixed relative distance via robust Vision & LiDAR sensor fusion.
+* **Disturbance Rejection:** Validated EKF and SDRE filters, demonstrating effective active noise rejection and stable state estimation during flight.
+* **Scenario 1 vs. Scenario 2:** Benchmarked performance between global localization (Pseudo-GPS, Scenario 1) and a fully GPS-denied environment (Scenario 2). The system successfully maintained formation in Scenario 2 solely through local relative localization, proving the robustness of the sensor fusion algorithm.
 
 ---
 
