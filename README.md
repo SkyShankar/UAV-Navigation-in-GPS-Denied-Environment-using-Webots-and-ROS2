@@ -100,10 +100,15 @@ git clone [https://github.com/SkyShankar/UAV-Navigation-in-GPS-Denied-Environmen
 cd UAV-Navigation-in-GPS-Denied-Environment-using-Webots-and-ROS2
 ```
 
-### 6.  **Install dependencies:**
+### 6.  **Install dependencies for ROS2 and YOLOv8:**
 ```bash
+sudo rosdep init
 rosdep update
+
 rosdep install --from-paths src --ignore-src -r -y
+
+# YOLOv8 library
+pip3 install ultralytics
 ```
 
 ### 7.  **Build the workspace:**
