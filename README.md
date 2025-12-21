@@ -11,8 +11,8 @@ The project implements a **Leader-Follower** architecture where a follower drone
 * **State Estimator:** Implementation of the custom **Extended Kalman Filter (EKF)** and **State-Dependent Riccati Equation (SDRE) Filter** that fuses high-rate IMU data with low-rate relative position measurements.
 * **Sensor Fusion:** Implementing sensor fusion of Camera (YOLOv8) + LiDAR and try to fetch local position of leader drone w.r.t. follower drone's coordinate system and try to mainatin given distance between both drones.
 * **Cooperative Localization and Navigation:** Two scenarios has been considered for coperative localizetion and navigation:
-*      **Scenario 1:** Active communication between Leader and Follower drone, where Leader drone is sending its own GPS location at low frequancy. (local position + leader's global position = Pseudo-GPS (For follower drone's localization over global frame))
-*      **Scenatio 2:** No Communication between Leader and follower drone, where follower drone doesn't have any localization facilty due to now global reference. (Still will follow leader drone with the help of sensor fusion's local postion data and mainatin given distance)
+*    **Scenario 1:** Active communication between Leader and Follower drone, where Leader drone is sending its own GPS location at low frequancy. (local position + leader's global position = Pseudo-GPS (For follower drone's localization over global frame))
+*    **Scenatio 2:** No Communication between Leader and follower drone, where follower drone doesn't have any localization facilty due to now global reference. (Still will follow leader drone with the help of sensor fusion's local postion data and mainatin given distance)
 
 ## 📊 Results
 
