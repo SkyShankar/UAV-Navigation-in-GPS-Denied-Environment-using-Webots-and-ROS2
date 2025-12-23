@@ -27,6 +27,11 @@ The framework was tested in scenarios involving curved paths and continuous turn
 | ![Scenario 1 Result](Results/Scenario_1_path.jpg) | ![Scenario 2 Result](Results/Scenario_2_path.jpg) |
 | *path tracking with global localization* | *path tracking using purely relative localization* |
 
+
+| Scenario 1: Pseudo-GPS | Scenario 2: GPS-Denied |
+| :---: | :---: |
+| ![Scenario 1 Result](Results/Scenario_1_attitude.jpg) | ![Scenario 2 Result](Results/Scenario_2_attitude.jpg) |
+| *Orientation of Follower drone is always towards Leader* | *Orientation of Follower drone is always towards Leader* |
 ---
 
 ## 📂 Repository Structure
