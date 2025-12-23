@@ -24,7 +24,7 @@ The framework was tested in scenarios involving curved paths and continuous turn
 * 
 | Scenario 1: Pseudo-GPS | Scenario 2: GPS-Denied |
 | :---: | :---: |
-| ![Scenario 1 Result](Results/Scenario1_path.jpg) | ![Scenario 2 Result](Results/Scenario2_path.jpg) |
+| ![Scenario 1 Result](Results/Scenario_1_path.jpg) | ![Scenario 2 Result](Results/Scenario_2_path.jpg) |
 | *path tracking with global localization* | *path tracking using purely relative localization* |
 
 ---
