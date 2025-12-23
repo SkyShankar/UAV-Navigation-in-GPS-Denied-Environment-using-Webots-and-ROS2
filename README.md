@@ -21,7 +21,7 @@ The framework was tested in scenarios involving curved paths and continuous turn
 * **Disturbance Rejection:** Validated EKF and SDRE filters, demonstrating effective active noise rejection and stable state estimation during flight.
 * **Scenario 1 vs. Scenario 2:** Benchmarked performance between global localization (Pseudo-GPS, Scenario 1) and a fully GPS-denied environment (Scenario 2). The system successfully maintained formation in Scenario 2 solely through local relative localization, proving the robustness of the sensor fusion algorithm.
 
-* 
+  
 | Scenario 1: Pseudo-GPS | Scenario 2: GPS-Denied |
 | :---: | :---: |
 | ![Scenario 1 Result](Results/Scenario_1_path.jpg) | ![Scenario 2 Result](Results/Scenario_2_path.jpg) |
